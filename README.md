@@ -10,3 +10,5 @@
     - http://127.0.0.1:8080/book
     - http://127.0.0.1:8080/author
     - http://127.0.0.1:8080/publishing
+5. Kafka:
+   - https://www.tpisoftware.com/tpu/articleDetails/2518
