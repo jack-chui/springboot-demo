@@ -11,7 +11,7 @@ https://stackoverflow.com/questions/14621495/what-is-the-difference-between-an-s
 2. Hibernate has a interface call JPARepository which extends CRUDRepository and integrate EntityManager. You can check the source code
 
 ## FetchType vs FetchMode
-1. FetchType 係請緊拎entity時LAZY拎埋入面嘅entity 定 eager一早拎埋
+1. FetchType 係請緊拎entity時LAZY拎埋入面嘅entity 定 eager一早拎埋. 唔關join 唔join 時
 2. FetchMode 係講緊拎個時用JOIN, SELECT定點拎
 3. FetchMode.JOIN will be ignored when using EntityManager.createQuery() except you use EntityManager CriteriaBuilder. https://stackoverflow.com/questions/18891789/fetchmode-join-makes-no-difference-for-manytomany-relations-in-spring-jpa-reposi
 
@@ -26,6 +26,10 @@ https://stackoverflow.com/questions/14621495/what-is-the-difference-between-an-s
 1. http://127.0.0.1:8080/book
 2. http://127.0.0.1:8080/author
 3. http://127.0.0.1:8080/publishing
+
+# RabbitMQ
+1. Basic: https://kucw.github.io/blog/2020/11/rabbitmq/
+2. Priority Queue: https://medium.com/willhanchen/rabbitmq-%E8%A8%8A%E6%81%AF%E7%9A%84%E5%A6%82%E4%BD%95%E6%8F%92%E9%9A%8A-priority-ee7c9566b388
 
 # Kafka:
 https://www.tpisoftware.com/tpu/articleDetails/2518
