@@ -55,3 +55,5 @@ https://stackoverflow.com/questions/14621495/what-is-the-difference-between-an-s
 
 # Kafka:
 https://www.tpisoftware.com/tpu/articleDetails/2518
+1. Refer to kafka-docker
+2. 
