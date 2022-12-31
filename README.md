@@ -32,21 +32,21 @@ https://stackoverflow.com/questions/14621495/what-is-the-difference-between-an-s
 2. Priority Queue: https://medium.com/willhanchen/rabbitmq-%E8%A8%8A%E6%81%AF%E7%9A%84%E5%A6%82%E4%BD%95%E6%8F%92%E9%9A%8A-priority-ee7c9566b388
 
 ## Without Exchange:
-1. Direct Mode (Only one consumer)
+1. Simple (Only one consumer)
 <br/>
 <img src="https://kucw.github.io/images/blog/rabbitmq_direct.png"/>
-2. Worker Mode (Multiple consumer)
+2. Worker (Multiple consumer)
 <br/>
 <img src="https://kucw.github.io/images/blog/rabbitmq_worker.png"/>
 
 ## With Exchange
-1. Fan-out (Message throw to all queue)
+1. Fan-out (type = fanout) (Message throw to all queue)
 <br/>
 <img src="https://kucw.github.io/images/blog/rabbitmq_subscribe.png"/>
-2. Direct (當 Producer 把 message 丟給 Exchange 時，同時要在這個 message 上面帶上一個 routing key，而 Exchange 就會根據這個 routing key，將 message 丟到指定的 Queue 上)
+2. Routing (type = direct) (當 Producer 把 message 丟給 Exchange 時，同時要在這個 message 上面帶上一個 routing key，而 Exchange 就會根據這個 routing key，將 message 丟到指定的 Queue 上)
 <br/>
 <img src="https://kucw.github.io/images/blog/rabbitmq_routing1.png"/>
-3. Topic (Similar to Direct, but it can use wildcard)
+3. Topic (type = topic) (Similar to Direct, but it can use wildcard)
 <br/>
 <img src="https://kucw.github.io/images/blog/rabbitmq_topics.png"/>
 
