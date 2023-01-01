@@ -55,5 +55,29 @@ https://stackoverflow.com/questions/14621495/what-is-the-difference-between-an-s
 
 # Kafka:
 https://www.tpisoftware.com/tpu/articleDetails/2518
-1. Refer to kafka-docker
-2. 
+
+https://www.1ju.org/kafka/apache-kafka-fundamentals
+
+Refer to kafka-docker
+
+
+1. Broker: Kafka server
+2. Cluster: A set of brokers
+3. Topic: Similar to RabbitMQ routing key
+4. Partition: Each topic contain 1 to many partition. New message append 平分 in one of partition. Partition store in one of distributed brokers
+5. Replica: If partition = 3, replica = 3, then each partition will have 3 replica. Total = 9 replica
+6. Leader: Each partition will have one broker as a leader node, other broker as a follower. If leader node crash, other follower will become as a leader.
+7. Retention: can define data retention policy
+
+## Entire flow:
+1. Producer send message with topic to broker.
+   - Send message with key => same key will hash to same partition
+   - Without key => 轮询的方式 assign to partition
+2. Broker assign message in one of partition.
+3. Consumer subscribe topic by group id.
+    - Each partition only max 1 consumer with same group id to process
+    - Partition limit how many consumer process at the same time
+    - If number of partition is larger than number of consumer, some consumer will also consume no one handle partition.
+    - If group id is different, consumer groups will process message at the same time. Like fanout design
+4. If message is processed by consumer, consumer will fire acknowledged to broker.
+5. Broker update offset in ZooKeeper

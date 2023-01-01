@@ -14,15 +14,33 @@ import java.util.Date;
 @Component
 public class KafkaConsumer {
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @PostConstruct
-    public void init() {
-        kafkaTemplate.send(KafkaConfig.TOPIC, "Hello Jack " + new Date());
+    public void init() throws InterruptedException {
+        for(int i = 0; i < 10; i++) {
+            kafkaTemplate.send(KafkaConfig.TOPIC, String.valueOf(i), "New Order " + i);
+//            Thread.sleep(500);
+        }
     }
 
-    @KafkaListener(topics = { KafkaConfig.TOPIC }, groupId = "demo-group")
-    public void consume(String message) {
-        log.info("Receive Kafka message: {}", message);
+    @KafkaListener(topics = { KafkaConfig.TOPIC }, groupId = "group.new-order")
+    public void consume1(String message) {
+        try {
+            log.info("Receive Kafka message in 1: {}", message);
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            log.error(e);
+        }
+    }
+
+    @KafkaListener(topics = { KafkaConfig.TOPIC }, groupId = "group.new-order")
+    public void consume2(String message) {
+        try {
+            log.info("Receive Kafka message in 2: {}", message);
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            log.error(e);
+        }
     }
 }

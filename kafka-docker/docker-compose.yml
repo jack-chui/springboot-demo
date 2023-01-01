@@ -15,28 +15,12 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENERS: INTERNAL://:9092,OUTSIDE://:9094
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181                                       # kafka 节点启动后，会向 zookeeper 注册自己，同时告诉 zookeeper 自身的通信地址，这个地址就是配置文件中的 advertised.listeners
+      KAFKA_LISTENERS: INTERNAL://:9092,OUTSIDE://:9094                             # 真正建立socket连接
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,OUTSIDE://localhost:9094    # 当我们对 OUTSIDE://localhost:9094请求建立连接，kafka 服务器会通过 zookeeper 中注册的监听器，找到 OUTSIDE 监听器，然后通过 listeners 中找到对应的 OUTSIDE://:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,OUTSIDE:PLAINTEXT    # PLAINTEXT mean no need to encrypt when transfer. can be SSL or other value
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-#  kafka:
-#    image: confluentinc/cp-kafka:latest
-#    depends_on:
-#      - zookeeper
-#    ports:
-#      - 9092:9092
-#    environment:
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1                                     # if you only contain 1 broker, must set this to 1 since the default is 3
 
   kafka-ui:
     image: provectuslabs/kafka-ui
