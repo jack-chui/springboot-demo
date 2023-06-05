@@ -1,3 +1,5 @@
+Revert
+
 # Java
 1. Why Java class don't inherit annotation: https://stackoverflow.com/a/4745820
 
